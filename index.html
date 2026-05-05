@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DataCraft by Pratap – Microsoft Certified BI & Data Engineering</title>
+<title>DataCraft by Pratap Billu – Microsoft Certified BI & Data Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -264,7 +264,7 @@
 <nav id="nav">
   <a href="#" class="nav-logo">
     <div class="logo-mark">DC</div>
-    <div>DataCraft <span class="logo-sub">by Pratap</span></div>
+    <div>DataCraft <span class="logo-sub">by Pratap Billu</span></div>
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
@@ -654,7 +654,7 @@
         </div>
         <div><label>Project Description</label><textarea name="message" placeholder="Tell me about your data challenges, current systems (ERP, CRM, etc.), and what you want to achieve..." required></textarea></div>
         <button type="submit" class="submit-btn">Send Message →</button>
-        <p style="margin-top:14px;font-size:.8rem;color:rgba(255,255,255,.45);">This will open your email app and send your message to <strong>saipratapbillu@gmail.com</strong>.</p>
+        <p style="margin-top:14px;font-size:.8rem;color:rgba(255,255,255,.45);">This will open both your email client and WhatsApp chat so Pratap receives the message on both channels.</p>
       </form>
     </div>
   </div>
@@ -662,7 +662,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><em>DataCraft</em> by Pratap</div>
+  <div class="footer-logo"><em>DataCraft</em> by Pratap Billu</div>
   <div class="footer-links">
     <a href="#services">Services</a>
     <a href="#tech">Stack</a>
@@ -717,10 +717,13 @@
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\nService: ${service}\n\nProject Description:\n${message}`
     );
+    const whatsappNumber = '971586773403';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${body}`;
+    window.open(whatsappUrl, '_blank');
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
     const btn = form.querySelector('.submit-btn');
-    btn.textContent = "✓ Opened email client";
+    btn.textContent = "✓ Opened email + WhatsApp";
     btn.style.background = 'linear-gradient(135deg,#059669,#10b981)';
     setTimeout(()=>{ btn.textContent = 'Send Message →'; btn.style.background=''; }, 4500);
   }
