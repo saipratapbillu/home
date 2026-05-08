@@ -126,8 +126,8 @@
   .section-header-right { font-size:.78rem; color:var(--muted); line-height:1.8; max-width:340px; flex-shrink:0; }
 
   /* SERVICES BENTO */
-  .services-bento { display:grid; grid-template-columns:repeat(12,1fr); gap:2px; background:var(--border); }
-  .sc { background:var(--card-bg); padding:44px 40px; position:relative; overflow:hidden; transition:all .35s; cursor:none; }
+  .services-bento { display:grid; grid-template-columns:repeat(12,1fr); gap:2px; background:var(--border); width:100%; min-width:0; }
+  .sc { background:var(--card-bg); padding:44px 40px; position:relative; overflow:hidden; transition:all .35s; cursor:none; min-width:0; word-wrap:break-word; }
   .sc::after { content:''; position:absolute; bottom:0;left:0;right:0; height:3px; background:linear-gradient(to right,var(--accent),var(--accent2)); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
   .sc:hover::after { transform:scaleX(1); }
   .sc:hover { background:var(--ink); }
@@ -136,6 +136,7 @@
   .sc:hover .sc-desc { color:rgba(255,255,255,.45); }
   .sc:hover .sc-icon { border-color:rgba(255,255,255,.12); }
   .sc:hover .stag { border-color:rgba(255,255,255,.12); color:rgba(255,255,255,.4); }
+  .sc-desc, .sc-title, .sc-tags, .stag { overflow-wrap:break-word; word-break:break-word; }
   .sc-1 { grid-column:span 6; }
   .sc-2 { grid-column:span 6; display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
   .sc-3, .sc-4, .sc-5 { grid-column:span 4; }
@@ -257,8 +258,10 @@
     .hero-viz { padding:40px 28px; }
     .section { padding:72px 24px; }
     .services-bento { grid-template-columns:1fr; }
-    .sc-1,.sc-2,.sc-3,.sc-4,.sc-5,.sc-6,.sc-7,.sc-8,.sc-9 { grid-column:span 1; }
+    .sc-1,.sc-2,.sc-3,.sc-4,.sc-5,.sc-6,.sc-7,.sc-8,.sc-9,.sc-10 { grid-column:span 1; }
     .sc-2 { grid-template-columns:1fr; }
+    .sc-10 { grid-column:span 1; }
+    .sc, .sc-desc, .sc-title, .sc-tags, .stag, .fv-row { min-width:0; }
     .tech-grid { grid-template-columns:repeat(4,1fr); }
     .tl-item { grid-template-columns:1fr; gap:20px; }
     .cert-inner { flex-direction:column; }
