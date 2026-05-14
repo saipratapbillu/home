@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="version" content="1.0.0">
-<!-- Site version: 1.0.0 -->
 <title>DataCraft by Pratap Billu – Microsoft Certified BI & Data Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -148,7 +147,6 @@
   .sc-desc { font-size:.77rem; line-height:1.85; color:var(--muted); transition:color .35s; }
   .sc-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:20px; }
   .stag { font-size:.6rem; letter-spacing:.07em; text-transform:uppercase; padding:5px 11px; border-radius:100px; border:1px solid var(--border); color:var(--muted); transition:all .35s; }
-  /* featured dark card */
   .sc-feat { background:var(--ink) !important; }
   .sc-feat .sc-num { color:rgba(255,255,255,.04) !important; }
   .sc-feat .sc-title { color:#fff !important; }
@@ -156,7 +154,6 @@
   .sc-feat .sc-icon { border-color:rgba(255,255,255,.12) !important; }
   .sc-feat .stag { border-color:rgba(255,255,255,.12) !important; color:rgba(255,255,255,.4) !important; }
   .sc-feat::after { background:linear-gradient(to right,var(--glow),var(--accent)) !important; transform:scaleX(1) !important; }
-  /* inline fv viz */
   .fv { display:flex; flex-direction:column; gap:9px; }
   .fv-row { display:flex; align-items:center; gap:10px; }
   .fv-lbl { font-size:.6rem; color:rgba(255,255,255,.4); width:76px; flex-shrink:0; text-align:right; }
@@ -222,8 +219,6 @@
   .submit-btn:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(37,99,235,.5); }
   .whatsapp-btn { display:inline-flex; align-items:center; justify-content:center; width:100%; margin-top:22px; background:#25d366; color:#fff; text-decoration:none; padding:14px 18px; border-radius:100px; font-family:'DM Mono',monospace; letter-spacing:.06em; box-shadow:0 12px 30px rgba(37,99,235,.12); transition:transform .2s,background .2s; }
   .whatsapp-btn:hover { background:#1ebe5b; transform:translateY(-1px); }
-  .chat-whatsapp { background:#25d366; }
-  .chat-whatsapp:hover { background:#1ebe5b; }
 
   /* FOOTER */
   footer { background:#04060f; padding:40px 52px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
@@ -241,31 +236,55 @@
   .reveal-delay-2 { transition-delay:.2s; }
   .reveal-delay-3 { transition-delay:.3s; }
 
+  /* CHAT WIDGET */
+  .chat-launcher { position:fixed; right:24px; bottom:24px; width:62px; height:62px; border-radius:22px; border:none; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; cursor:pointer; box-shadow:0 24px 60px rgba(37,99,235,.2); display:flex; align-items:center; justify-content:center; z-index:1200; transition:transform .2s,box-shadow .2s; font-size:1.5rem; }
+  .chat-launcher:hover { transform:translateY(-2px); box-shadow:0 32px 70px rgba(37,99,235,.3); }
+  .chat-panel { position:fixed; right:24px; bottom:104px; width:360px; max-width:calc(100vw - 32px); max-height:520px; background:rgba(255,255,255,.98); border:1px solid rgba(8,12,24,.1); border-radius:24px; box-shadow:0 24px 80px rgba(8,12,24,.12); overflow:hidden; display:flex; flex-direction:column; z-index:1200; opacity:0; transform:translateY(12px) scale(.97); pointer-events:none; transition:opacity .2s ease,transform .2s ease; }
+  .chat-panel.open { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .chat-head { display:flex; align-items:center; justify-content:space-between; padding:18px 18px 12px; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; }
+  .chat-head h3 { font-family:'Syne',sans-serif; font-size:.95rem; margin:0; letter-spacing:.03em; }
+  .chat-head-meta { font-size:.65rem; opacity:.75; margin-top:2px; }
+  .chat-close { font-size:1.1rem; background:none; border:none; color:rgba(255,255,255,.9); cursor:pointer; line-height:1; padding:4px; }
+  .chat-body { padding:16px; overflow-y:auto; flex:1; background:#f8fafc; display:flex; flex-direction:column; gap:12px; }
+  .chat-message { display:flex; gap:12px; align-items:flex-end; }
+  .chat-message.user { justify-content:flex-end; }
+  .chat-bubble { max-width:80%; padding:12px 14px; border-radius:18px; font-size:.82rem; line-height:1.55; box-shadow:0 2px 8px rgba(8,12,24,.06); }
+  .chat-message.user .chat-bubble { background:var(--accent); color:#fff; border-bottom-right-radius:4px; }
+  .chat-message.bot .chat-bubble { background:#fff; color:var(--ink); border-bottom-left-radius:4px; border:1px solid rgba(8,12,24,.07); }
+  .chat-hints { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .chat-hint { background:rgba(37,99,235,.08); color:var(--accent); border-radius:999px; padding:7px 13px; font-size:.72rem; cursor:pointer; transition:background .2s; border:1px solid rgba(37,99,235,.15); font-family:'DM Mono',monospace; }
+  .chat-hint:hover { background:rgba(37,99,235,.16); }
+  .chat-typing { display:flex; gap:5px; align-items:center; padding:14px; }
+  .chat-typing span { width:7px; height:7px; border-radius:50%; background:#94a3b8; animation:typingBounce 1.2s infinite ease-in-out; }
+  .chat-typing span:nth-child(2) { animation-delay:.2s; }
+  .chat-typing span:nth-child(3) { animation-delay:.4s; }
+  @keyframes typingBounce { 0%,80%,100%{transform:scale(.7);opacity:.4} 40%{transform:scale(1);opacity:1} }
+  .chat-input-area { padding:12px 14px 16px; border-top:1px solid rgba(8,12,24,.08); background:#fff; display:flex; flex-direction:column; gap:8px; }
+  .chat-input-row { display:flex; gap:8px; }
+  .chat-input { flex:1; min-height:40px; border:1px solid rgba(8,12,24,.14); border-radius:999px; padding:10px 16px; font-family:'DM Mono',monospace; font-size:.82rem; color:var(--ink); outline:none; transition:border-color .2s; }
+  .chat-input:focus { border-color:var(--accent); }
+  .chat-send-btn { width:40px; height:40px; border:none; border-radius:50%; background:var(--ink); color:#fff; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
+  .chat-send-btn:hover { background:var(--accent); }
+  .chat-wa-btn { width:100%; border:none; border-radius:999px; padding:10px 16px; background:#25d366; color:#fff; font-family:'DM Mono',monospace; font-size:.75rem; letter-spacing:.04em; cursor:pointer; transition:background .2s; display:flex; align-items:center; justify-content:center; gap:7px; }
+  .chat-wa-btn:hover { background:#1ebe5b; }
+
   @media (max-width:1200px) {
     nav { padding:16px 32px; }
     .hero-left { padding:130px 32px 60px; }
-    .hero-right { min-height:520px; }
-    .hero-viz { padding:48px 36px; }
     .section { padding:90px 32px; }
-    .services-bento { gap:1px; }
     .tech-grid { grid-template-columns:repeat(6,1fr); }
     .tl-item { gap:32px; }
-    .cert-inner { gap:32px; }
   }
-
   @media (max-width:960px) {
     nav { padding:16px 24px; }
     .nav-links,.nav-cert { display:none; }
     .hero { grid-template-columns:1fr; }
     .hero-right { min-height:460px; }
     .hero-left { padding:120px 24px 60px; }
-    .hero-viz { padding:40px 28px; }
     .section { padding:72px 24px; }
     .services-bento { grid-template-columns:1fr; }
     .sc-1,.sc-2,.sc-3,.sc-4,.sc-5,.sc-6,.sc-7,.sc-8,.sc-9,.sc-10 { grid-column:span 1; }
     .sc-2 { grid-template-columns:1fr; }
-    .sc-10 { grid-column:span 1; }
-    .sc, .sc-desc, .sc-title, .sc-tags, .stag, .fv-row { min-width:0; }
     .tech-grid { grid-template-columns:repeat(4,1fr); }
     .tl-item { grid-template-columns:1fr; gap:20px; }
     .cert-inner { flex-direction:column; }
@@ -276,69 +295,18 @@
     .stat+.stat { padding-left:0; border-left:none; border-top:1px solid var(--border); padding-top:20px; }
     .section-header { flex-direction:column; align-items:flex-start; gap:16px; }
   }
-
   @media (max-width:768px) {
-    body { font-size: 15px; }
     nav { padding:14px 18px; }
-    .nav-logo { font-size:.95rem; }
-    .nav-cta { padding:10px 18px; font-size:.68rem; }
     .hero-left { padding:100px 18px 48px; }
-    .hero-eyebrow { margin-bottom:24px; font-size:.64rem; }
-    .hero-sub { font-size:.95rem; max-width:none; }
-    .cert-badges { justify-content:flex-start; }
-    .hero-actions { flex-direction:column; align-items:flex-start; width:100%; }
-    .btn-primary, .btn-ghost { width:100%; justify-content:center; }
-    .hero-stats { margin-top:28px; }
-    .hero-right { min-height:420px; }
-    .hero-viz { padding:30px 20px; }
-    .kpi-row { grid-template-columns:repeat(2,1fr); gap:12px; }
-    .pipeline-area { grid-template-columns:1fr; }
-    .services-bento { grid-template-columns:1fr; }
-    .sc { padding:32px 24px; }
-    .sc-2 { grid-template-columns:1fr; }
+    .section { padding:64px 18px; }
     .tech-grid { grid-template-columns:repeat(2,1fr); }
     .tl-item { grid-template-columns:1fr; gap:18px; }
     .contact-section { padding:80px 18px; }
-    .contact-grid { gap:32px; }
-    .form-row { grid-template-columns:1fr; }
     .footer { padding:32px 18px; flex-direction:column; align-items:flex-start; }
     .footer-links { flex-wrap:wrap; gap:16px; }
+    .chat-panel { right:16px; bottom:100px; left:16px; width:auto; max-width:none; }
+    .chat-launcher { right:16px; bottom:16px; }
   }
-
-  @media (max-width:480px) {
-    body { font-size: 14px; }
-    .hero-left { padding:80px 16px 40px; }
-    h1 { font-size: clamp(2.4rem,8vw,3.6rem); }
-    .hero-sub { font-size:.95rem; }
-    .hero-eyebrow { padding: 6px 12px; }
-    .hero-viz { padding:24px 16px; }
-    .kpi-row { grid-template-columns:1fr; }
-    .chart-area, .pipeline-area, .pipe-card, .kpi { min-width:0; }
-    .cert-cards, .form-row { grid-template-columns:1fr; }
-    .section { padding:64px 18px; }
-    .footer { padding:28px 16px; }
-  }
-  .chat-launcher { position:fixed; right:24px; bottom:24px; width:62px; height:62px; border-radius:22px; border:none; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; cursor:pointer; box-shadow:0 24px 60px rgba(37,99,235,.2); display:flex; align-items:center; justify-content:center; z-index:1200; transition:transform .2s,box-shadow .2s; }
-  .chat-launcher:hover { transform:translateY(-2px); box-shadow:0 32px 70px rgba(37,99,235,.3); }
-  .chat-panel { position:fixed; right:24px; bottom:104px; width:360px; max-width:calc(100vw - 32px); max-height:520px; background:rgba(255,255,255,.98); border:1px solid rgba(8,12,24,.1); border-radius:24px; box-shadow:0 24px 80px rgba(8,12,24,.12); overflow:hidden; display:flex; flex-direction:column; z-index:1200; opacity:0; transform:translateY(12px) scale(.97); pointer-events:none; transition:opacity .2s ease,transform .2s ease; }
-  .chat-panel.open { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
-  .chat-header { display:flex; align-items:center; justify-content:space-between; padding:18px 18px 12px; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; }
-  .chat-header h3 { font-size:.95rem; margin:0; letter-spacing:.03em; }
-  .chat-close { font-size:1.1rem; background:none; border:none; color:rgba(255,255,255,.9); cursor:pointer; }
-  .chat-body { padding:16px; overflow-y:auto; flex:1; background:#f8fafc; display:flex; flex-direction:column; gap:12px; }
-  .chat-message { display:flex; gap:12px; align-items:flex-end; }
-  .chat-message.user { justify-content:flex-end; }
-  .chat-bubble { max-width:80%; padding:12px 14px; border-radius:18px; font-size:.82rem; line-height:1.5; box-shadow:0 12px 30px rgba(8,12,24,.06); }
-  .chat-message.user .chat-bubble { background:var(--accent); color:#fff; border-bottom-right-radius:4px; }
-  .chat-message.bot .chat-bubble { background:#fff; color:var(--ink); border-bottom-left-radius:4px; }
-  .chat-hints { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
-  .chat-hint { background:rgba(37,99,235,.08); color:var(--accent); border-radius:999px; padding:8px 12px; font-size:.72rem; cursor:pointer; transition:background .2s; border:1px solid transparent; }
-  .chat-hint:hover { background:rgba(37,99,235,.15); }
-  .chat-input-area { padding:14px 16px 18px; border-top:1px solid rgba(8,12,24,.08); background:#fff; display:grid; gap:10px; }
-  .chat-input { width:100%; min-height:42px; border:1px solid rgba(8,12,24,.14); border-radius:999px; padding:12px 16px; font-family:'DM Mono',monospace; font-size:.82rem; color:var(--ink); outline:none; }
-  .chat-submit { width:100%; border:none; border-radius:999px; padding:12px 16px; background:var(--ink); color:#fff; font-family:'DM Mono',monospace; font-size:.8rem; letter-spacing:.05em; cursor:pointer; transition:background .2s; }
-  .chat-submit:hover { background:var(--accent); }
-  @media (max-width:640px) { .chat-panel { right:16px; bottom:100px; width:auto; left:16px; max-width:none; } .chat-launcher{right:16px;bottom:16px;} }
 </style>
 </head>
 <body>
@@ -450,9 +418,7 @@
     </div>
     <div class="section-header-right">7+ years of hands-on delivery across investments, real estate, insurance, HR, healthcare, and government sectors.</div>
   </div>
-
   <div class="services-bento">
-    <!-- S1 ETL Pipelines & Data Engineering -->
     <div class="sc sc-1 reveal">
       <div class="sc-num">01</div>
       <div class="sc-icon">🔄</div>
@@ -460,8 +426,6 @@
       <p class="sc-desc">End-to-end ETL pipelines using Azure Data Factory, Microsoft Fabric, SSIS, and PySpark. Built scalable ingestion frameworks with incremental loads, control tables, Delta tables, and automated scheduling across ERP, CRM, APIs, and databases.</p>
       <div class="sc-tags"><span class="stag">ADF</span><span class="stag">Fabric</span><span class="stag">SSIS</span><span class="stag">PySpark</span><span class="stag">Delta Tables</span></div>
     </div>
-
-    <!-- S2 API Integration — featured dark -->
     <div class="sc sc-2 sc-feat reveal reveal-delay-1">
       <div>
         <div class="sc-num">02</div>
@@ -479,8 +443,6 @@
         <div class="fv-row"><div class="fv-lbl">Genesys</div><div class="fv-outer"><div class="fv-inner" style="width:88%;animation-delay:.5s"></div></div><div class="fv-pct">88%</div></div>
       </div>
     </div>
-
-    <!-- S3 Data Warehouse Design -->
     <div class="sc sc-3 reveal">
       <div class="sc-num">03</div>
       <div class="sc-icon">🗄️</div>
@@ -488,8 +450,6 @@
       <p class="sc-desc">Scalable Star & Snowflake schema design across Fabric, Synapse, SQL Server, and Snowflake with SCD handling and performance-optimized data models.</p>
       <div class="sc-tags"><span class="stag">Synapse</span><span class="stag">Fabric</span><span class="stag">Snowflake</span><span class="stag">SCD</span></div>
     </div>
-
-    <!-- S4 Data Governance & RLS/RBS -->
     <div class="sc sc-4 reveal reveal-delay-1">
       <div class="sc-num">04</div>
       <div class="sc-icon">🔒</div>
@@ -497,8 +457,6 @@
       <p class="sc-desc">End-to-end data security across database and semantic layers — implementing Row-Level Security (RLS) at SQL/database level and DAX-based RLS/RBS in Power BI semantic models. Includes workspace access control, gateway configuration, audit logs, and secure enterprise reporting.</p>
       <div class="sc-tags"><span class="stag">RLS / RBS</span><span class="stag">DAX</span><span class="stag">Audit</span><span class="stag">Gateway</span></div>
     </div>
-
-    <!-- S5 SQL Performance Tuning -->
     <div class="sc sc-5 reveal reveal-delay-2">
       <div class="sc-num">05</div>
       <div class="sc-icon">🚀</div>
@@ -506,8 +464,6 @@
       <p class="sc-desc">Optimized queries, indexes, stored procedures, and large reporting views for high-performance analytics workloads.</p>
       <div class="sc-tags"><span class="stag">Indexes</span><span class="stag">Procs</span><span class="stag">Views</span><span class="stag">Optimization</span></div>
     </div>
-
-    <!-- S6 Cloud Migration -->
     <div class="sc sc-6 reveal">
       <div class="sc-num">06</div>
       <div class="sc-icon">☁️</div>
@@ -515,8 +471,6 @@
       <p class="sc-desc">On-prem to Azure migration with full data mapping, validation, and BI continuity across ERP, CRM, and legacy systems.</p>
       <div class="sc-tags"><span class="stag">ADF</span><span class="stag">Azure</span><span class="stag">D365</span><span class="stag">ServiceNow</span></div>
     </div>
-
-    <!-- S7 SSAS / Semantic Models -->
     <div class="sc sc-7 reveal reveal-delay-1">
       <div class="sc-num">07</div>
       <div class="sc-icon">📐</div>
@@ -524,8 +478,6 @@
       <p class="sc-desc">Tabular models and enterprise datasets with optimized relationships and live Power BI connectivity.</p>
       <div class="sc-tags"><span class="stag">SSAS</span><span class="stag">Tabular</span><span class="stag">Semantic</span><span class="stag">Live</span></div>
     </div>
-
-    <!-- S8 Power BI Dashboards -->
     <div class="sc sc-8 reveal reveal-delay-2">
       <div class="sc-num">08</div>
       <div class="sc-icon">📊</div>
@@ -533,8 +485,6 @@
       <p class="sc-desc">Interactive executive-grade dashboards with advanced DAX, paginated reports, bookmarks, hierarchies, and automated email subscriptions for Finance, HR, Operations, and KPI scorecards.</p>
       <div class="sc-tags"><span class="stag">Power BI</span><span class="stag">DAX</span><span class="stag">Paginated</span><span class="stag">Bookmarks</span></div>
     </div>
-
-    <!-- S9 Power Automate & Alerts -->
     <div class="sc sc-9 reveal reveal-delay-3">
       <div class="sc-num">09</div>
       <div class="sc-icon">⚡</div>
@@ -542,8 +492,6 @@
       <p class="sc-desc">Automated reporting, alerts, and workflow triggers for business events and KPI monitoring.</p>
       <div class="sc-tags"><span class="stag">Automate</span><span class="stag">Activator</span><span class="stag">Workflows</span><span class="stag">Alerts</span></div>
     </div>
-
-    <!-- S10 IIS Web Embedding -->
     <div class="sc sc-10 reveal">
       <div class="sc-num">10</div>
       <div class="sc-icon">🌐</div>
@@ -588,7 +536,7 @@
   </div>
 </section>
 
-<!-- EXPERIENCE TIMELINE -->
+<!-- EXPERIENCE -->
 <section class="section" id="experience">
   <div class="section-header reveal">
     <div>
@@ -598,7 +546,6 @@
     <div class="section-header-right">Enterprise BI solutions delivered across Abu Dhabi, Dubai, and Hyderabad — spanning investments, real estate, government, insurance, and operations.</div>
   </div>
   <div class="timeline reveal">
-
     <div class="tl-item">
       <div class="tl-meta">
         <div class="tl-period">Jan 2025 – Present</div>
@@ -612,7 +559,6 @@
         <div class="tl-tags"><span class="stag">Microsoft Fabric</span><span class="stag">D365</span><span class="stag">IIS</span><span class="stag">Oracle Unifier</span><span class="stag">Power Automate</span><span class="stag">CAFM</span><span class="stag">Joget</span></div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-meta">
         <div class="tl-period">Apr 2024 – Dec 2024</div>
@@ -626,7 +572,6 @@
         <div class="tl-tags"><span class="stag">Azure Synapse</span><span class="stag">Fabric</span><span class="stag">Salesforce</span><span class="stag">Genesys</span><span class="stag">Data Activator</span><span class="stag">Python</span></div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-meta">
         <div class="tl-period">Aug 2022 – Mar 2024</div>
@@ -640,7 +585,6 @@
         <div class="tl-tags"><span class="stag">MSBI / SSIS</span><span class="stag">Power BI</span><span class="stag">PowerShell</span><span class="stag">Python</span><span class="stag">Cloud Migration</span><span class="stag">RLS</span></div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-meta">
         <div class="tl-period">Feb 2023 – Dec 2023</div>
@@ -654,7 +598,6 @@
         <div class="tl-tags"><span class="stag">Python</span><span class="stag">SSIS</span><span class="stag">Postman</span><span class="stag">Web Scraping</span><span class="stag">SQL Server</span><span class="stag">SQL Jobs</span></div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-meta">
         <div class="tl-period">Jun 2021 – Nov 2021</div>
@@ -668,7 +611,6 @@
         <div class="tl-tags"><span class="stag">Power BI</span><span class="stag">Snowflake</span><span class="stag">DAX</span><span class="stag">Office 365</span></div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-meta">
         <div class="tl-period">Aug 2018 – Apr 2021</div>
@@ -682,7 +624,6 @@
         <div class="tl-tags"><span class="stag">SSAS</span><span class="stag">SSIS</span><span class="stag">Power BI</span><span class="stag">SQL Server</span><span class="stag">Excel</span></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -723,7 +664,7 @@
         <div class="ci-row"><div class="ci-icon">📍</div>Abu Dhabi, UAE · Open to Remote</div>
         <div class="ci-row"><div class="ci-icon">🕐</div>Sun – Thu · 09:00 – 17:00 GST</div>
       </div>
-      <a class="whatsapp-btn" href="https://wa.me/971586773403?text=Hello%20Pratap%2C%20I%20would%20like%20to%20discuss%20a%20BI%20or%20data%20engineering%20project." target="_blank" rel="noopener">Discuss on WhatsApp</a>
+      <a class="whatsapp-btn" href="https://wa.me/971586773403?text=Hello%20Pratap%2C%20I%20would%20like%20to%20discuss%20a%20BI%20or%20data%20engineering%20project." target="_blank" rel="noopener">💬 Discuss on WhatsApp</a>
     </div>
     <div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
@@ -768,175 +709,315 @@
   <div class="footer-right">© 2026 DataCraft v1.0.0 · All rights reserved</div>
 </footer>
 
-<button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open chat with DataCraft">💬</button>
-<div class="chat-panel" id="chatPanel" aria-live="polite">
-  <div class="chat-header">
-    <h3>DataCraft Assistant</h3>
+<!-- CHAT WIDGET -->
+<button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open chat assistant">💬</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="DataCraft Chat Assistant">
+  <div class="chat-head">
+    <div>
+      <h3>DataCraft Assistant</h3>
+      <div class="chat-head-meta">🟢 Online · Replies instantly</div>
+    </div>
     <button class="chat-close" id="chatClose" type="button" aria-label="Close chat">✕</button>
   </div>
   <div class="chat-body" id="chatBody">
-    <div class="chat-message bot"><div class="chat-bubble">Hello! I’m DataCraft’s quick assistant. Ask me about services, the technology stack, project experience, certifications, or contact details.</div></div>
+    <div class="chat-message bot">
+      <div class="chat-bubble">Hello! I'm the DataCraft assistant. Ask me about Pratap's services, tech stack, experience, certifications, or how to get in touch. 👋</div>
+    </div>
     <div class="chat-hints">
       <button class="chat-hint" type="button">Services</button>
       <button class="chat-hint" type="button">Tech stack</button>
       <button class="chat-hint" type="button">Experience</button>
+      <button class="chat-hint" type="button">Certifications</button>
       <button class="chat-hint" type="button">Contact</button>
     </div>
   </div>
   <div class="chat-input-area">
-    <input id="chatInput" class="chat-input" type="text" placeholder="Ask about ETL, Power BI, Fabric, or contact information…" aria-label="Chat message input" />
-    <button id="chatSend" class="chat-submit" type="button">Send</button>
-    <button id="chatWhatsApp" class="chat-submit chat-whatsapp" type="button">Discuss on WhatsApp</button>
+    <div class="chat-input-row">
+      <input id="chatInput" class="chat-input" type="text" placeholder="Ask anything about DataCraft…" aria-label="Chat message" />
+      <button id="chatSend" class="chat-send-btn" type="button" aria-label="Send message">➤</button>
+    </div>
+    <button id="chatWA" class="chat-wa-btn" type="button">💬 Chat directly on WhatsApp</button>
   </div>
 </div>
 
 <script>
-  const siteVersion = '1.0.0';
-  // Cursor
+  /* ── CURSOR ── */
   const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx=0,my=0,rx=0,ry=0;
+  const ring   = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
   document.addEventListener('mousemove', e => {
-    mx=e.clientX; my=e.clientY;
+    mx = e.clientX; my = e.clientY;
     cursor.style.transform = `translate(${mx-5}px,${my-5}px)`;
   });
-  (function animRing(){
-    rx += (mx-rx-18)*.1;
-    ry += (my-ry-18)*.1;
+  (function animRing() {
+    rx += (mx - rx - 18) * .1;
+    ry += (my - ry - 18) * .1;
     ring.style.transform = `translate(${rx}px,${ry}px)`;
     requestAnimationFrame(animRing);
   })();
-  document.querySelectorAll('a,button,.sc,.tech-item,.tl-item').forEach(el=>{
-    el.addEventListener('mouseenter',()=>ring.classList.add('big'));
-    el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
+  document.querySelectorAll('a,button,.sc,.tech-item,.tl-item').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('big'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('big'));
   });
 
-  // Scroll reveal
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-  },{threshold:0.07});
-  document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
+  /* ── SCROLL REVEAL ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 
-  // Nav shadow
-  window.addEventListener('scroll',()=>{
-    document.getElementById('nav').style.boxShadow = window.scrollY>60 ? '0 4px 32px rgba(8,12,24,.08)' : 'none';
+  /* ── NAV SHADOW ── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').style.boxShadow =
+      window.scrollY > 60 ? '0 4px 32px rgba(8,12,24,.08)' : 'none';
   });
 
-  // Form submit
-  function handleSubmit(e){
+  /* ── CONTACT FORM ── */
+  function handleSubmit(e) {
     e.preventDefault();
-    const form = e.target;
-    const name = form.elements.name.value.trim();
-    const email = form.elements.email.value.trim();
-    const company = form.elements.company.value.trim();
-    const service = form.elements.service.value.trim();
-    const message = form.elements.message.value.trim();
-    const recipient = 'saipratapbillu@gmail.com';
-    const subject = encodeURIComponent(`Website Contact: ${name || 'New Lead'} – ${service || 'Project Inquiry'}`);
+    const f = e.target;
+    const name    = f.elements.name.value.trim();
+    const email   = f.elements.email.value.trim();
+    const company = f.elements.company.value.trim();
+    const service = f.elements.service.value.trim();
+    const message = f.elements.message.value.trim();
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\nService: ${service}\n\nProject Description:\n${message}`
     );
-    const whatsappNumber = '971586773403';
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${body}`;
-    window.open(whatsappUrl, '_blank');
-    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-
-    const btn = form.querySelector('.submit-btn');
-    btn.textContent = "✓ Opened email + WhatsApp";
+    const subject = encodeURIComponent(`Website Contact: ${name || 'New Lead'} – ${service || 'Project Inquiry'}`);
+    window.open(`https://wa.me/971586773403?text=${body}`, '_blank');
+    window.location.href = `mailto:saipratapbillu@gmail.com?subject=${subject}&body=${body}`;
+    const btn = f.querySelector('.submit-btn');
+    btn.textContent = '✓ Opened email + WhatsApp';
     btn.style.background = 'linear-gradient(135deg,#059669,#10b981)';
-    setTimeout(()=>{ btn.textContent = 'Send Message →'; btn.style.background=''; }, 4500);
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 4500);
   }
 
-  // Chatbot assistant
-  const whatsappNumber = '971586773403';
-  const chatLauncher = document.getElementById('chatLauncher');
-  const chatPanel = document.getElementById('chatPanel');
-  const chatClose = document.getElementById('chatClose');
-  const chatBody = document.getElementById('chatBody');
-  const chatInput = document.getElementById('chatInput');
-  const chatSend = document.getElementById('chatSend');
-  const chatWhatsApp = document.getElementById('chatWhatsApp');
-
-  function openWhatsApp(message = 'Hello Pratap, I would like to discuss a BI or data engineering project.') {
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/${whatsappNumber}?text=${encoded}`, '_blank');
-  }
+  /* ════════════════════════════════════════
+     CHAT WIDGET
+  ════════════════════════════════════════ */
+  const WA_NUMBER = '971586773403';
 
   const chatResponses = [
+    /* ── PRIORITY: time / delivery / duration — must come FIRST ── */
     {
-      keywords: ['service', 'services', 'offer', 'offers', 'help', 'capability', 'capabilities'],
-      answer: 'I offer 10 core services including ETL pipelines, API integration, data warehouse design, RLS/RBS, SQL tuning, cloud migration, SSAS semantic models, Power BI dashboards, Power Automate alerts, and IIS Power BI embedding.'
+      keywords: ['how long','how much time','time to deliver','time to build','time to complete','delivery time','timeline','turnaround','deadline','when will','how fast','how quickly','how soon','duration','take to deliver','take to build','take to complete','take to create','take to develop','take to finish','take to make'],
+      answer: '⏱️ Delivery time depends on several factors:\n\n• Complexity & scope of the project\n• Number of data sources to integrate\n• Volume and quality of the data\n• Business requirements and review cycles\n• Access to source systems and stakeholders\n\nAs a general guide:\n📊 A simple Power BI dashboard — a few days to 1 week\n🔄 ETL pipeline + warehouse setup — 2 to 6 weeks\n☁️ Full cloud migration or enterprise BI platform — 1 to 3+ months\n\nEvery project is scoped individually. 📩 Reach out for a precise estimate!\n\n📧 saipratapbillu@gmail.com\n📞 +971 586 773 403'
     },
+    /* ── PRIORITY: process / workflow / how it works ── */
     {
-      keywords: ['stack', 'technology', 'tech', 'fabric', 'power bi', 'azure', 'synapse', 'snowflake', 'ssis', 'dynamics', 'python', 'pyspark', 'power automate'],
-      answer: 'The technology stack includes Microsoft Fabric, Azure Data Factory, Power BI, Azure Synapse, Snowflake DW, SSIS/MSBI, SQL Server, Dynamics 365, Oracle/Unifier, Python/PySpark, Power Automate, IIS embedding, REST APIs, SSAS/AAS, Data Activator, Informatica ICS, Fabric Lakehouse, Postman, PowerShell, Azure SQL DB, and Salesforce CRM.'
+      keywords: ['process','workflow','how do you work','how does it work','approach','methodology','steps','procedure','how do you start','how to start','getting started','onboarding'],
+      answer: '🔁 Here\'s the typical engagement process:\n\n1️⃣ Discovery call — understand your data, systems & goals\n2️⃣ Scoping — define deliverables, timeline & tech stack\n3️⃣ Development — build pipelines, models or dashboards\n4️⃣ Review & UAT — iterate based on your feedback\n5️⃣ Deployment — go live with documentation & handover\n6️⃣ Support — optional post-delivery support\n\nThe exact workflow adapts to each client\'s environment. 📩 Let\'s discuss yours!\n\n📧 saipratapbillu@gmail.com\n📞 +971 586 773 403'
     },
+    /* ── PRIORITY: pricing / cost ── */
     {
-      keywords: ['experience', 'project', 'projects', 'clients', 'work', 'client', 'experience'],
-      answer: 'Pratap has delivered enterprise BI projects for Wusoom Holding, Damac Properties, Mubadala Investment, Human Resource Authority, Hastings Insurance, and Kiwla/Aahari Corp.'
+      keywords: ['how much','price','pricing','cost','charge','fee','rate','budget','quote','quotation','invoice','payment'],
+      answer: '💰 Pricing is fully project-based and depends on:\n\n• Scope and complexity of deliverables\n• Number of data sources and integrations\n• Timeline and urgency\n• Ongoing vs one-time engagement\n\nThere\'s no fixed rate — every project gets a tailored quote after a short discovery call. 📩 Reach out to discuss your requirements!\n\n📧 saipratapbillu@gmail.com\n📞 +971 586 773 403'
     },
+    /* ── services ── */
     {
-      keywords: ['certification', 'certified', 'certificate', 'credentials', 'pl-300', 'dp-600', 'microsoft certified'],
-      answer: 'Pratap holds PL-300 Power BI Data Analyst and DP-600 Fabric Analytics Engineer Microsoft certifications.'
+      keywords: ['service','services','offer','offers','capability','capabilities','what do you do','what can you do'],
+      answer: '🛠️ I offer 10 core services:\n\n1. ETL Pipelines & Data Engineering\n2. API Integration & Web Scraping\n3. Data Warehouse Design\n4. Data Governance & RLS/RBS\n5. SQL Performance Tuning\n6. Cloud Migration\n7. SSAS / Semantic Models\n8. Power BI Dashboards & Data Insights\n9. Power Automate & Alerts\n10. IIS Web Embedding\n\nWant details on any specific service?'
     },
+    /* ── tech stack — broad keywords removed to avoid false matches ── */
     {
-      keywords: ['contact', 'email', 'phone', 'hire', 'available', 'reach', 'in touch'],
-      answer: 'Email: saipratapbillu@gmail.com · Phone: +971 586 773 403 · Based in Abu Dhabi, UAE · Available for remote projects Sunday–Thursday, 09:00–17:00 GST.'
+      keywords: ['tech stack','technology stack','tools used','what tools','what technologies','microsoft fabric','azure data factory','azure synapse','snowflake','ssis','dynamics 365','pyspark','informatica','data activator'],
+      answer: '⚙️ Technology stack includes:\n\nMicrosoft Fabric · Azure Data Factory · Power BI · Azure Synapse · Snowflake DW · SSIS/MSBI · SQL Server · Dynamics 365 · Oracle/Unifier · Python/PySpark · Power Automate · IIS Embedding · REST APIs · SSAS/AAS · Data Activator · Informatica ICS · Postman · PowerShell · Azure SQL DB · Salesforce CRM'
     },
+    /* ── experience ── */
     {
-      keywords: ['wusoom', 'damac', 'mubadala', 'human resource authority', 'hastings', 'kiwla', 'aahari'],
-      answer: 'Recent engagements include Fabric OneLake integration, KPI dashboards, cloud migration, API extraction, web scraping, paginated reports, and IIS Power BI portal embedding.'
+      keywords: ['experience','project','projects','client','clients','company','companies','wusoom','damac','mubadala','hastings','kiwla','aahari','human resource authority'],
+      answer: '💼 Project experience spans 6 enterprises:\n\n• Wusoom Holding (Jan 2025–Present) — Fabric, D365, IIS, Oracle Unifier\n• Damac Properties (Apr–Dec 2024) — Salesforce, Genesys, KPI Dashboards\n• Mubadala Investment (Aug 2022–Mar 2024) — Cloud Migration, Internal Audit BI\n• Human Resource Authority (2023) — API Extraction, Web Scraping\n• Hastings Insurance (2021) — Snowflake DW, Power BI\n• Kiwla/Aahari Corp (2018–2021) — SSAS Cubes, SSIS'
+    },
+    /* ── certifications ── */
+    {
+      keywords: ['certification','certified','certificate','credentials','pl-300','dp-600','pl300','dp600','microsoft certified'],
+      answer: '🏅 Two active Microsoft Certifications:\n\n• PL-300 — Power BI Data Analyst\n• DP-600 — Fabric Analytics Engineer\n\nCovering the full modern analytics and data engineering stack.'
+    },
+    /* ── contact ── */
+    {
+      keywords: ['contact','email','phone','reach','hire','available','whatsapp','location','where','abu dhabi','remote'],
+      answer: '📬 Get in touch with Pratap:\n\n📧 saipratapbillu@gmail.com\n📞 +971 586 773 403\n📍 Abu Dhabi, UAE · Open to Remote\n🕐 Sun–Thu · 09:00–17:00 GST\n\nClick the WhatsApp button below to start a conversation right now!'
+    },
+    /* ── ETL ── */
+    {
+      keywords: ['etl','pipeline','pipelines','data engineering','data factory','incremental load','control table','delta table'],
+      answer: '🔄 ETL & Data Engineering:\n\nEnd-to-end pipelines using Azure Data Factory, Microsoft Fabric, SSIS, and PySpark. Includes incremental loads, control tables, Delta tables, and automated scheduling across ERP, CRM, APIs, and databases.'
+    },
+    /* ── API / scraping ── */
+    {
+      keywords: ['api integration','web scraping','rest api','postman','json transformation','python script','powershell script'],
+      answer: '🔗 API Integration & Web Scraping:\n\nAutomated extraction from REST APIs using Python, PowerShell, and Postman. JSON transformation into structured warehouse layers and real-time ingestion pipelines. Connected to D365, Salesforce, ServiceNow, TakAfo, Genesys, and more.'
+    },
+    /* ── Data Warehouse ── */
+    {
+      keywords: ['data warehouse','warehouse design','star schema','snowflake schema','scd','slowly changing dimension'],
+      answer: '🗄️ Data Warehouse Design:\n\nScalable Star & Snowflake schema design across Fabric, Synapse, SQL Server, and Snowflake with SCD handling and performance-optimized data models.'
+    },
+    /* ── RLS / Governance ── */
+    {
+      keywords: ['rls','rbs','row level security','data governance','dax security','audit log','gateway config','access control','workspace access'],
+      answer: '🔒 Data Governance & RLS/RBS:\n\nEnd-to-end data security — RLS at SQL/database level and DAX-based RLS/RBS in Power BI semantic models. Also covers workspace access, gateway config, and audit logs.'
+    },
+    /* ── SQL tuning ── */
+    {
+      keywords: ['sql tuning','performance tuning','query optimization','stored procedure','index optimization','reporting view'],
+      answer: '🚀 SQL Performance Tuning:\n\nOptimized queries, indexes, stored procedures, and large reporting views for high-performance analytics workloads on SQL Server, Synapse, and Fabric.'
+    },
+    /* ── Cloud migration ── */
+    {
+      keywords: ['cloud migration','on-prem','on premise','azure migration','legacy migration','erp migration','crm migration'],
+      answer: '☁️ Cloud Migration:\n\nOn-prem to Azure migration with full data mapping, validation, and BI continuity. Experience migrating ERP, CRM, and legacy systems including Pentana → K10 Vision and HPSM → ServiceNow.'
+    },
+    /* ── SSAS ── */
+    {
+      keywords: ['ssas','semantic model','tabular model','analysis services','live connection','enterprise dataset'],
+      answer: '📐 SSAS / Semantic Models:\n\nTabular models and enterprise datasets with optimized relationships and live Power BI connectivity using SSAS / AAS.'
+    },
+    /* ── Power BI ── */
+    {
+      keywords: ['power bi','dashboard','dax','paginated report','kpi scorecard','executive report','bookmark','report design'],
+      answer: '📊 Power BI Dashboards:\n\nInteractive executive-grade dashboards with advanced DAX, paginated reports, bookmarks, hierarchies, and automated email subscriptions for Finance, HR, Operations, and KPI scorecards.\n\n⏱️ Delivery time varies by scope — contact for a tailored estimate!\n📧 saipratapbillu@gmail.com · 📞 +971 586 773 403'
+    },
+    /* ── Power Automate ── */
+    {
+      keywords: ['power automate','workflow automation','data activator','automate alert','kpi alert','flow trigger','notification flow'],
+      answer: '⚡ Power Automate & Alerts:\n\nAutomated reporting, alerts, and workflow triggers for business events and KPI monitoring using Power Automate and Data Activator.'
+    },
+    /* ── IIS ── */
+    {
+      keywords: ['iis','web embedding','web portal','portal embedding','iis config','power bi embed'],
+      answer: '🌐 IIS Web Embedding:\n\nConfigure and maintain IIS to embed Power BI dashboards into enterprise web portals with secure access, seamless report integration, and enhanced user interactivity.'
+    },
+    /* ── years / experience level ── */
+    {
+      keywords: ['how many years','years of experience','experience level','senior level','background'],
+      answer: '📅 Pratap has 7+ years of enterprise BI and data engineering experience, with 7+ major clients served across Abu Dhabi, Dubai, and Hyderabad.'
+    },
+    /* ── greetings ── */
+    {
+      keywords: ['hello','hi','hey','good morning','good afternoon','good evening','howdy','greetings'],
+      answer: '👋 Hello! Great to hear from you. I can answer questions about services, tech stack, project experience, certifications, timelines, pricing, and contact details. What would you like to know?'
+    },
+    /* ── thanks ── */
+    {
+      keywords: ['thank','thanks','thank you','appreciated','great','awesome','perfect'],
+      answer: '😊 You\'re welcome! Feel free to ask anything else, or reach out to Pratap directly via WhatsApp for project discussions.'
     }
   ];
 
-  function appendChatMessage(text, sender = 'bot') {
-    const message = document.createElement('div');
-    message.className = `chat-message ${sender}`;
+  const FALLBACK = '__FALLBACK__';
+
+  function findResponse(text) {
+    const q = text.toLowerCase();
+    for (const entry of chatResponses) {
+      if (entry.keywords.some(k => q.includes(k))) return entry.answer;
+    }
+    return FALLBACK;
+  }
+
+  /* ── DOM refs ── */
+  const chatLauncher = document.getElementById('chatLauncher');
+  const chatPanel    = document.getElementById('chatPanel');
+  const chatClose    = document.getElementById('chatClose');
+  const chatBody     = document.getElementById('chatBody');
+  const chatInput    = document.getElementById('chatInput');
+  const chatSend     = document.getElementById('chatSend');
+  const chatWA       = document.getElementById('chatWA');
+
+  /* ── helpers ── */
+  function hintsEl() { return chatBody.querySelector('.chat-hints'); }
+
+  function addMsg(content, role, isHTML = false) {
+    const wrap   = document.createElement('div');
+    wrap.className = `chat-message ${role}`;
     const bubble = document.createElement('div');
     bubble.className = 'chat-bubble';
-    bubble.textContent = text;
-    message.appendChild(bubble);
-    const hintRow = chatBody.querySelector('.chat-hints');
-    if (hintRow) {
-      chatBody.insertBefore(message, hintRow);
-    } else {
-      chatBody.appendChild(message);
-    }
+    if (isHTML) bubble.innerHTML = content;
+    else        bubble.textContent = content;
+    wrap.appendChild(bubble);
+    const hints = hintsEl();
+    hints ? chatBody.insertBefore(wrap, hints) : chatBody.appendChild(wrap);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return wrap;
+  }
+
+  function addTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'chat-message bot';
+    wrap.id = 'chatTyping';
+    wrap.innerHTML = '<div class="chat-bubble"><div class="chat-typing"><span></span><span></span><span></span></div></div>';
+    const hints = hintsEl();
+    hints ? chatBody.insertBefore(wrap, hints) : chatBody.appendChild(wrap);
     chatBody.scrollTop = chatBody.scrollHeight;
   }
 
-  function findChatResponse(text) {
-    const normalized = text.toLowerCase();
-    for (const entry of chatResponses) {
-      if (entry.keywords.some(keyword => normalized.includes(keyword))) {
-        return entry.answer;
-      }
-    }
-    return 'I can help with services, technology stack, project experience, certifications, and contact details. Ask me about ETL, Power BI, Fabric, or how to reach Pratap.';
+  function removeTyping() {
+    const el = document.getElementById('chatTyping');
+    if (el) el.remove();
   }
 
-  function sendChatMessage() {
-    const userText = chatInput.value.trim();
-    if (!userText) return;
-    appendChatMessage(userText, 'user');
+  function openWA(msg) {
+    const text = msg || 'Hello Pratap, I would like to discuss a BI or data engineering project.';
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+  }
+
+  /* ── send logic ── */
+  function send() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addMsg(text, 'user');
     chatInput.value = '';
     chatInput.focus();
-    const response = findChatResponse(userText);
-    setTimeout(() => appendChatMessage(response, 'bot'), 250);
+
+    const answer = findResponse(text);
+    addTyping();
+
+    if (answer === FALLBACK) {
+      /* First bot message — "I don't have that" */
+      setTimeout(() => {
+        removeTyping();
+        addMsg("I don't have a specific answer for that just yet! For anything detailed, Pratap is just a message away.", 'bot');
+      }, 500);
+
+      /* Second bot message — WhatsApp CTA button */
+      setTimeout(() => {
+        const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello Pratap, I have a question: ' + text)}`;
+        addMsg(
+          `<a href="${waUrl}" target="_blank" rel="noopener"
+              style="display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;
+                     padding:10px 18px;border-radius:999px;text-decoration:none;font-size:.8rem;
+                     font-weight:500;font-family:'DM Mono',monospace;">
+            💬 Ask Pratap on WhatsApp
+          </a>`,
+          'bot',
+          true
+        );
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        removeTyping();
+        addMsg(answer, 'bot');
+      }, 600);
+    }
   }
 
+  /* ── events ── */
   chatLauncher.addEventListener('click', () => chatPanel.classList.toggle('open'));
-  chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
-  chatSend.addEventListener('click', sendChatMessage);
-  chatWhatsApp.addEventListener('click', () => openWhatsApp(chatInput.value.trim() || 'Hello Pratap, I would like to discuss a BI or data engineering project.'));
-  chatInput.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); sendChatMessage(); } });
-  chatBody.addEventListener('click', event => {
-    if (event.target.matches('.chat-hint')) {
-      chatInput.value = event.target.textContent;
-      sendChatMessage();
+  chatClose.addEventListener('click',    () => chatPanel.classList.remove('open'));
+  chatSend.addEventListener('click',     send);
+  chatInput.addEventListener('keydown',  e => { if (e.key === 'Enter') { e.preventDefault(); send(); } });
+  chatWA.addEventListener('click',       () => openWA(chatInput.value.trim() || null));
+  chatBody.addEventListener('click',     e => {
+    if (e.target.matches('.chat-hint')) {
+      chatInput.value = e.target.textContent;
+      send();
     }
   });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape') chatPanel.classList.remove('open'); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') chatPanel.classList.remove('open');
+  });
 </script>
 </body>
 </html>
