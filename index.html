@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="version" content="1.0.0">
+<meta name="version" content="1.0.1">
 <title>DataCraft by Pratap Billu – Microsoft Certified BI & Data Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -217,7 +217,7 @@
   .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   .submit-btn { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border:none; border-radius:100px; padding:16px 40px; font-family:'DM Mono',monospace; font-size:.8rem; letter-spacing:.07em; text-transform:uppercase; cursor:none; transition:all .3s; box-shadow:0 8px 32px rgba(37,99,235,.35); margin-top:4px; width:100%; }
   .submit-btn:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(37,99,235,.5); }
-  .whatsapp-btn { display:inline-flex; align-items:center; justify-content:center; width:100%; margin-top:22px; background:#25d366; color:#fff; text-decoration:none; padding:14px 18px; border-radius:100px; font-family:'DM Mono',monospace; letter-spacing:.06em; box-shadow:0 12px 30px rgba(37,99,235,.12); transition:transform .2s,background .2s; }
+  .whatsapp-btn { display:inline-flex; align-items:center; justify-content:center; width:fit-content; margin-top:14px; background:#25d366; color:#fff; text-decoration:none; padding:10px 22px; border-radius:100px; font-family:'DM Mono',monospace; font-size:.72rem; letter-spacing:.05em; box-shadow:0 6px 18px rgba(37,99,235,.12); transition:transform .2s,background .2s; }
   .whatsapp-btn:hover { background:#1ebe5b; transform:translateY(-1px); }
 
   /* FOOTER */
@@ -248,9 +248,21 @@
   .chat-body { padding:16px; overflow-y:auto; flex:1; background:#f8fafc; display:flex; flex-direction:column; gap:12px; }
   .chat-message { display:flex; gap:12px; align-items:flex-end; }
   .chat-message.user { justify-content:flex-end; }
-  .chat-bubble { max-width:80%; padding:12px 14px; border-radius:18px; font-size:.82rem; line-height:1.55; box-shadow:0 2px 8px rgba(8,12,24,.06); }
+
+  /* ── FIX 1: white-space pre-wrap so \n renders as line breaks ── */
+  .chat-bubble {
+    max-width: 80%;
+    padding: 12px 14px;
+    border-radius: 18px;
+    font-size: .82rem;
+    line-height: 1.65;
+    box-shadow: 0 2px 8px rgba(8,12,24,.06);
+    white-space: pre-wrap;   /* ← KEY FIX: honour \n in text content */
+    word-break: break-word;
+  }
   .chat-message.user .chat-bubble { background:var(--accent); color:#fff; border-bottom-right-radius:4px; }
-  .chat-message.bot .chat-bubble { background:#fff; color:var(--ink); border-bottom-left-radius:4px; border:1px solid rgba(8,12,24,.07); }
+  .chat-message.bot  .chat-bubble { background:#fff; color:var(--ink); border-bottom-left-radius:4px; border:1px solid rgba(8,12,24,.07); }
+
   .chat-hints { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
   .chat-hint { background:rgba(37,99,235,.08); color:var(--accent); border-radius:999px; padding:7px 13px; font-size:.72rem; cursor:pointer; transition:background .2s; border:1px solid rgba(37,99,235,.15); font-family:'DM Mono',monospace; }
   .chat-hint:hover { background:rgba(37,99,235,.16); }
@@ -664,6 +676,7 @@
         <div class="ci-row"><div class="ci-icon">📍</div>Abu Dhabi, UAE · Open to Remote</div>
         <div class="ci-row"><div class="ci-icon">🕐</div>Sun – Thu · 09:00 – 17:00 GST</div>
       </div>
+      <p style="font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.7;margin-top:28px;">Click the WhatsApp button below to start a conversation right now!</p>
       <a class="whatsapp-btn" href="https://wa.me/971586773403?text=Hello%20Pratap%2C%20I%20would%20like%20to%20discuss%20a%20BI%20or%20data%20engineering%20project." target="_blank" rel="noopener">💬 Discuss on WhatsApp</a>
     </div>
     <div>
@@ -706,10 +719,262 @@
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
   </div>
-  <div class="footer-right">© 2026 DataCraft v1.0.0 · All rights reserved</div>
+  <div class="footer-right">© 2026 DataCraft v1.0.1 · All rights reserved</div>
 </footer>
 
-<!-- CHAT WIDGET -->
+<!-- EXPERIENCE MODAL -->
+<div id="expModal" style="display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div id="expModalBackdrop" onclick="closeExperienceModal()" style="position:absolute;inset:0;background:rgba(8,12,24,.55);backdrop-filter:blur(6px);"></div>
+  <div style="position:relative;background:#fff;border-radius:24px;max-width:520px;width:100%;box-shadow:0 32px 80px rgba(8,12,24,.2);overflow:hidden;z-index:1;">
+    <!-- Modal header -->
+    <div style="background:linear-gradient(135deg,#2563eb,#7c3aed);padding:24px 28px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+      <div>
+        <div style="font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:6px;">Career Timeline</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-.02em;" id="expModalYears">7+ Years of Experience</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.7);margin-top:4px;">Since August 2018 · BI &amp; Data Engineering</div>
+      </div>
+      <button onclick="closeExperienceModal()" type="button" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">✕</button>
+    </div>
+    <!-- Modal body -->
+    <div style="padding:24px 28px 20px;max-height:340px;overflow-y:auto;">
+      <p style="font-size:.78rem;line-height:1.8;color:#374151;margin-bottom:16px;">💡 I've worked on BI and Data Engineering projects for enterprises across real estate, finance, insurance, government, and retail industries.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+        <div style="background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#2563eb;margin-bottom:3px;">2025 – Present</div>
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">Wusoom Holding</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Microsoft Fabric, Power BI, D365, Oracle Unifier, IIS</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#7c3aed;margin-bottom:3px;">2024</div>
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">Damac Properties</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">KPI Dashboards, Salesforce, Genesys Analytics</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #0891b2;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#0891b2;margin-bottom:3px;">2023</div>
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">Human Resource Authority</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">API Extraction, Web Scraping, Government Analytics</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#059669;margin-bottom:3px;">2022 – 2024</div>
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">Mubadala Investment</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Cloud Migration, Internal Audit BI (Tech Mahindra)</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#d97706;margin-bottom:3px;">2021</div>
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">Hastings Insurance</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Snowflake DW, Reporting Analytics (Accenture)</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #6b7280;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:3px;">2018 – 2021</div>
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">Kiwla / Aahari Corp</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">SSAS Cubes, SSIS, Power BI (Hyderabad)</div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal footer -->
+    <div style="padding:0 28px 24px;display:flex;gap:10px;">
+      <a href="https://saipratapbillu.github.io/home/#experience" target="_blank" rel="noopener"
+         style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+                background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;
+                padding:13px 20px;border-radius:100px;text-decoration:none;font-size:.78rem;
+                font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.04em;
+                box-shadow:0 6px 20px rgba(37,99,235,.3);">
+        🌐 Full Timeline →
+      </a>
+      <button onclick="closeExperienceModal()" type="button"
+         style="padding:13px 20px;border-radius:100px;border:1px solid rgba(8,12,24,.15);
+                background:#fff;font-size:.78rem;font-family:'DM Mono',monospace;
+                color:#6b7280;cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES MODAL -->
+<div id="servicesModal" style="display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div onclick="closeServicesModal()" style="position:absolute;inset:0;background:rgba(8,12,24,.55);backdrop-filter:blur(6px);"></div>
+  <div style="position:relative;background:#fff;border-radius:24px;max-width:560px;width:100%;box-shadow:0 32px 80px rgba(8,12,24,.2);overflow:hidden;z-index:1;">
+    <div style="background:linear-gradient(135deg,#2563eb,#7c3aed);padding:24px 28px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+      <div>
+        <div style="font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:6px;">What I Offer</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-.02em;">10 Core Services</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.7);margin-top:4px;">End-to-end BI &amp; Data Engineering Solutions</div>
+      </div>
+      <button onclick="closeServicesModal()" type="button" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">✕</button>
+    </div>
+    <div style="padding:24px 28px 20px;max-height:360px;overflow-y:auto;">
+      <p style="font-size:.78rem;line-height:1.8;color:#374151;margin-bottom:16px;">💡 From raw data ingestion to executive dashboards — every service is delivered end-to-end with enterprise-grade quality.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+        <div style="background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">🔄 ETL Pipelines &amp; Data Engineering</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">SSIS, ADF, Fabric Pipelines, Python — scalable ingestion from any source</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">🔌 API Integration &amp; Web Scraping</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">REST APIs, Postman, Python — automated data extraction and enrichment</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #0891b2;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">🏗️ Data Warehouse Design</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Star/Snowflake schemas, SQL Server, Synapse, Fabric OneLake</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">🔐 Data Governance &amp; RLS/RBS</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Row-level security, workspace access controls, audit logging</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">⚡ SQL Performance Tuning</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Query optimisation, indexing strategies, stored procedures</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #0891b2;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">☁️ Cloud Migration</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">On-prem to Azure with full data mapping, validation &amp; BI continuity</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">📐 SSAS / Semantic Models</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Tabular models, enterprise datasets, live Power BI connectivity</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">📊 Power BI Dashboards &amp; Data Insights</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Advanced DAX, paginated reports, bookmarks, KPI scorecards</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">⚡ Power Automate &amp; Alerts</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Automated reporting, alerts, and workflow triggers for KPI monitoring</div>
+        </div>
+        <div style="background:#f8fafc;border-left:3px solid #6b7280;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#080c18;">🌐 IIS Web Embedding</div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Secure Power BI embedding into enterprise web portals via IIS</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0 28px 24px;display:flex;gap:10px;">
+      <a href="#services" onclick="closeServicesModal()"
+         style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+                background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;
+                padding:13px 20px;border-radius:100px;text-decoration:none;font-size:.78rem;
+                font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.04em;
+                box-shadow:0 6px 20px rgba(37,99,235,.3);">
+        🔍 View Full Services →
+      </a>
+      <button onclick="closeServicesModal()" type="button"
+         style="padding:13px 20px;border-radius:100px;border:1px solid rgba(8,12,24,.15);
+                background:#fff;font-size:.78rem;font-family:'DM Mono',monospace;
+                color:#6b7280;cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TECH MODAL -->
+<div id="techModal" style="display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div onclick="closeTechModal()" style="position:absolute;inset:0;background:rgba(8,12,24,.55);backdrop-filter:blur(6px);"></div>
+  <div style="position:relative;background:#fff;border-radius:24px;max-width:560px;width:100%;box-shadow:0 32px 80px rgba(8,12,24,.2);overflow:hidden;z-index:1;">
+    <div style="background:linear-gradient(135deg,#2563eb,#7c3aed);padding:24px 28px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+      <div>
+        <div style="font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:6px;">Full Stack Arsenal</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-.02em;">Technology Stack</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.7);margin-top:4px;">21 battle-tested tools across the modern data stack</div>
+      </div>
+      <button onclick="closeTechModal()" type="button" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">✕</button>
+    </div>
+    <div style="padding:24px 28px 20px;max-height:360px;overflow-y:auto;">
+      <p style="font-size:.78rem;line-height:1.8;color:#374151;margin-bottom:16px;">💡 Every tool has been earned through real enterprise delivery — not just listed on a CV.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+        <div style="background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🧵</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Microsoft Fabric</div><div style="font-size:.64rem;color:#6b7280;">Lakehouse, Pipelines</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🔷</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Azure Data Factory</div><div style="font-size:.64rem;color:#6b7280;">ETL Orchestration</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">📊</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Power BI</div><div style="font-size:.64rem;color:#6b7280;">Dashboards, DAX</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🔵</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Azure Synapse</div><div style="font-size:.64rem;color:#6b7280;">Analytics DW</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #0891b2;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">❄️</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Snowflake</div><div style="font-size:.64rem;color:#6b7280;">Cloud DW</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #0891b2;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">⚙️</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">SSIS / MSBI</div><div style="font-size:.64rem;color:#6b7280;">ETL Pipelines</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">💾</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">SQL Server</div><div style="font-size:.64rem;color:#6b7280;">RDBMS, SSAS</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🏢</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Dynamics 365</div><div style="font-size:.64rem;color:#6b7280;">ERP Integration</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🔶</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Oracle / Unifier</div><div style="font-size:.64rem;color:#6b7280;">Project Finance</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🐍</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Python / PySpark</div><div style="font-size:.64rem;color:#6b7280;">Scripting, APIs</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">⚡</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Power Automate</div><div style="font-size:.64rem;color:#6b7280;">Workflows, Alerts</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🌐</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">IIS Embedding</div><div style="font-size:.64rem;color:#6b7280;">Web Portal BI</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🔗</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">REST APIs</div><div style="font-size:.64rem;color:#6b7280;">Postman, JSON</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">📐</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">SSAS / AAS</div><div style="font-size:.64rem;color:#6b7280;">Tabular Models</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🔔</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Data Activator</div><div style="font-size:.64rem;color:#6b7280;">Real-time Triggers</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">📋</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Informatica ICS</div><div style="font-size:.64rem;color:#6b7280;">Cloud Integration</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #0891b2;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🧩</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Salesforce CRM</div><div style="font-size:.64rem;color:#6b7280;">CRM Analytics</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #0891b2;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">☁️</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Azure SQL DB</div><div style="font-size:.64rem;color:#6b7280;">Cloud Database</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🛡️</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">PowerShell</div><div style="font-size:.64rem;color:#6b7280;">Automation, Admin</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">📬</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Postman</div><div style="font-size:.64rem;color:#6b7280;">API Testing</div></div></div>
+        <div style="background:#f8fafc;border-left:3px solid #6b7280;border-radius:0 8px 8px 0;padding:9px 12px;display:flex;align-items:center;gap:8px;"><span style="font-size:1.1rem;">🏗️</span><div><div style="font-size:.78rem;font-weight:700;color:#080c18;">Fabric Lakehouse</div><div style="font-size:.64rem;color:#6b7280;">Data Lake + DW</div></div></div>
+      </div>
+    </div>
+    <div style="padding:0 28px 24px;display:flex;gap:10px;">
+      <a href="#tech" onclick="closeTechModal()"
+         style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+                background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;
+                padding:13px 20px;border-radius:100px;text-decoration:none;font-size:.78rem;
+                font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.04em;
+                box-shadow:0 6px 20px rgba(37,99,235,.3);">
+        🔧 View Full Stack →
+      </a>
+      <button onclick="closeTechModal()" type="button"
+         style="padding:13px 20px;border-radius:100px;border:1px solid rgba(8,12,24,.15);
+                background:#fff;font-size:.78rem;font-family:'DM Mono',monospace;
+                color:#6b7280;cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICATIONS MODAL -->
+<div id="certsModal" style="display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div onclick="closeCertsModal()" style="position:absolute;inset:0;background:rgba(8,12,24,.55);backdrop-filter:blur(6px);"></div>
+  <div style="position:relative;background:#fff;border-radius:24px;max-width:520px;width:100%;box-shadow:0 32px 80px rgba(8,12,24,.2);overflow:hidden;z-index:1;">
+    <div style="background:linear-gradient(135deg,#2563eb,#7c3aed);padding:24px 28px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+      <div>
+        <div style="font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:6px;">Credentials</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-.02em;">2× Microsoft Certified</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.7);margin-top:4px;">Active certifications covering the full analytics stack</div>
+      </div>
+      <button onclick="closeCertsModal()" type="button" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">✕</button>
+    </div>
+    <div style="padding:24px 28px 20px;max-height:340px;overflow-y:auto;">
+      <p style="font-size:.78rem;line-height:1.8;color:#374151;margin-bottom:16px;">🏅 Both certifications are active and cover the full Microsoft modern analytics and data engineering stack.</p>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:16px;">
+        <div style="background:#f8fafc;border:1px solid rgba(37,99,235,.15);border-radius:12px;padding:18px 20px;display:flex;align-items:center;gap:16px;">
+          <div style="font-size:2.2rem;flex-shrink:0;">🏅</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:#080c18;margin-bottom:3px;">Power BI Data Analyst</div>
+            <div style="font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#2563eb;font-weight:600;margin-bottom:6px;">Microsoft Certified · PL-300</div>
+            <div style="font-size:.72rem;color:#6b7280;line-height:1.6;">Validates expertise in designing and building scalable data models, transforming data, and enabling advanced analytics in Power BI.</div>
+          </div>
+        </div>
+        <div style="background:#f8fafc;border:1px solid rgba(124,58,237,.15);border-radius:12px;padding:18px 20px;display:flex;align-items:center;gap:16px;">
+          <div style="font-size:2.2rem;flex-shrink:0;">🏅</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:#080c18;margin-bottom:3px;">Fabric Analytics Engineer</div>
+            <div style="font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#7c3aed;font-weight:600;margin-bottom:6px;">Microsoft Certified · DP-600</div>
+            <div style="font-size:.72rem;color:#6b7280;line-height:1.6;">Validates skills in implementing and managing analytics solutions using Microsoft Fabric, including Lakehouse, pipelines, and semantic models.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0 28px 24px;display:flex;gap:10px;">
+      <a href="#certifications" onclick="closeCertsModal()"
+         style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+                background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;
+                padding:13px 20px;border-radius:100px;text-decoration:none;font-size:.78rem;
+                font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.04em;
+                box-shadow:0 6px 20px rgba(37,99,235,.3);">
+        🏅 View Certifications →
+      </a>
+      <button onclick="closeCertsModal()" type="button"
+         style="padding:13px 20px;border-radius:100px;border:1px solid rgba(8,12,24,.15);
+                background:#fff;font-size:.78rem;font-family:'DM Mono',monospace;
+                color:#6b7280;cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
 <button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open chat assistant">💬</button>
 
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="DataCraft Chat Assistant">
@@ -722,7 +987,7 @@
   </div>
   <div class="chat-body" id="chatBody">
     <div class="chat-message bot">
-      <div class="chat-bubble">Hello! I'm the DataCraft assistant. Ask me about Pratap's services, tech stack, experience, certifications, or how to get in touch. 👋</div>
+      <div class="chat-bubble" id="greetingBubble"><!-- filled by JS --></div>
     </div>
     <div class="chat-hints">
       <button class="chat-hint" type="button">Services</button>
@@ -795,17 +1060,59 @@
   }
 
   /* ════════════════════════════════════════
-     CHAT WIDGET
+     FIX 2 — Dynamic years of experience
+     Start date: 1 August 2018
+  ════════════════════════════════════════ */
+  function calcExperience() {
+    const start = new Date(2018, 7, 1); // month is 0-indexed; 7 = August
+    const now   = new Date();
+    let years  = now.getFullYear() - start.getFullYear();
+    let months = now.getMonth()   - start.getMonth();
+    if (months < 0) { years--; months += 12; }
+    return { years, months };
+  }
+
+  /* ════════════════════════════════════════
+     FIX 3 — Time-based greeting on page load
+  ════════════════════════════════════════ */
+  function getTimeGreeting() {
+    const h = new Date().getHours(); // visitor's local time
+    if (h >= 5  && h < 12) return { emoji: '🌅', label: 'Good morning' };
+    if (h >= 12 && h < 17) return { emoji: '☀️', label: 'Good afternoon' };
+    if (h >= 17 && h < 21) return { emoji: '🌆', label: 'Good evening' };
+    return { emoji: '🌙', label: 'Good evening' };
+  }
+
+  (function initGreeting() {
+    const { emoji, label } = getTimeGreeting();
+    document.getElementById('greetingBubble').textContent =
+      `${emoji} ${label}! I'm the DataCraft assistant.\n\nAsk me about Pratap's services, tech stack, experience, certifications, or how to get in touch. 👋`;
+  })();
+
+  /* Auto-open chat after a short delay so visitors notice it */
+  setTimeout(() => {
+    document.getElementById('chatPanel').classList.add('open');
+  }, 1800);
+
+  /* ════════════════════════════════════════
+     CHAT RESPONSES
   ════════════════════════════════════════ */
   const WA_NUMBER = '971586773403';
 
+  /* ── FIX 2 (cont.) — build the dynamic years answer ── */
+  function buildYearsAnswer() {
+    const { years, months } = calcExperience();
+    const monthNote = months > 0 ? ` and ${months} month${months > 1 ? 's' : ''}` : '';
+    return `📅 Years of Experience:\n\nPratap started his career in August 2018 at Kiwla / Aahari Corp in Hyderabad, working on MSBI, SSAS Cubes, and Power BI dashboards.\n\nAs of today that's ${years} years${monthNote} of continuous enterprise BI & data engineering experience.\n\nCareer milestones:\n• 2018–2021 · Kiwla / Aahari Corp — SSAS, SSIS, Power BI\n• 2021       · Hastings Insurance (Accenture) — Snowflake DW\n• 2022–2024 · Mubadala Investment (Tech Mahindra) — Cloud Migration, Internal Audit BI\n• 2023       · Human Resource Authority — API Extraction, Web Scraping\n• 2024       · Damac Properties — KPI Dashboards, Salesforce, Genesys\n• 2025–Now  · Wusoom Holding — Fabric, D365, IIS, Oracle Unifier\n\n7+ major enterprise clients · 2× Microsoft Certified (PL-300 & DP-600)`;
+  }
+
   const chatResponses = [
-    /* ── PRIORITY: time / delivery / duration — must come FIRST ── */
+    /* ── PRIORITY: time / delivery / duration ── */
     {
       keywords: ['how long','how much time','time to deliver','time to build','time to complete','delivery time','timeline','turnaround','deadline','when will','how fast','how quickly','how soon','duration','take to deliver','take to build','take to complete','take to create','take to develop','take to finish','take to make'],
       answer: '⏱️ Delivery time depends on several factors:\n\n• Complexity & scope of the project\n• Number of data sources to integrate\n• Volume and quality of the data\n• Business requirements and review cycles\n• Access to source systems and stakeholders\n\nAs a general guide:\n📊 A simple Power BI dashboard — a few days to 1 week\n🔄 ETL pipeline + warehouse setup — 2 to 6 weeks\n☁️ Full cloud migration or enterprise BI platform — 1 to 3+ months\n\nEvery project is scoped individually. 📩 Reach out for a precise estimate!\n\n📧 saipratapbillu@gmail.com\n📞 +971 586 773 403'
     },
-    /* ── PRIORITY: process / workflow / how it works ── */
+    /* ── PRIORITY: process / workflow ── */
     {
       keywords: ['process','workflow','how do you work','how does it work','approach','methodology','steps','procedure','how do you start','how to start','getting started','onboarding'],
       answer: '🔁 Here\'s the typical engagement process:\n\n1️⃣ Discovery call — understand your data, systems & goals\n2️⃣ Scoping — define deliverables, timeline & tech stack\n3️⃣ Development — build pipelines, models or dashboards\n4️⃣ Review & UAT — iterate based on your feedback\n5️⃣ Deployment — go live with documentation & handover\n6️⃣ Support — optional post-delivery support\n\nThe exact workflow adapts to each client\'s environment. 📩 Let\'s discuss yours!\n\n📧 saipratapbillu@gmail.com\n📞 +971 586 773 403'
@@ -815,25 +1122,34 @@
       keywords: ['how much','price','pricing','cost','charge','fee','rate','budget','quote','quotation','invoice','payment'],
       answer: '💰 Pricing is fully project-based and depends on:\n\n• Scope and complexity of deliverables\n• Number of data sources and integrations\n• Timeline and urgency\n• Ongoing vs one-time engagement\n\nThere\'s no fixed rate — every project gets a tailored quote after a short discovery call. 📩 Reach out to discuss your requirements!\n\n📧 saipratapbillu@gmail.com\n📞 +971 586 773 403'
     },
+    /* ── years / experience level — dynamic ── */
+    {
+      keywords: ['how many years','years of experience','experience level','senior level','background','how long have you','when did you start','started working','career started','since when'],
+      get answer() { return buildYearsAnswer(); }
+    },
     /* ── services ── */
     {
       keywords: ['service','services','offer','offers','capability','capabilities','what do you do','what can you do'],
-      answer: '🛠️ I offer 10 core services:\n\n1. ETL Pipelines & Data Engineering\n2. API Integration & Web Scraping\n3. Data Warehouse Design\n4. Data Governance & RLS/RBS\n5. SQL Performance Tuning\n6. Cloud Migration\n7. SSAS / Semantic Models\n8. Power BI Dashboards & Data Insights\n9. Power Automate & Alerts\n10. IIS Web Embedding\n\nWant details on any specific service?'
+      answer: '__SERVICES__🛠️ I offer 10 core services:\n\n1. ETL Pipelines & Data Engineering\n2. API Integration & Web Scraping\n3. Data Warehouse Design\n4. Data Governance & RLS/RBS\n5. SQL Performance Tuning\n6. Cloud Migration\n7. SSAS / Semantic Models\n8. Power BI Dashboards & Data Insights\n9. Power Automate & Alerts\n10. IIS Web Embedding\n\nWant details on any specific service?'
     },
-    /* ── tech stack — broad keywords removed to avoid false matches ── */
+    /* ── tech stack ── */
     {
       keywords: ['tech stack','technology stack','tools used','what tools','what technologies','microsoft fabric','azure data factory','azure synapse','snowflake','ssis','dynamics 365','pyspark','informatica','data activator'],
-      answer: '⚙️ Technology stack includes:\n\nMicrosoft Fabric · Azure Data Factory · Power BI · Azure Synapse · Snowflake DW · SSIS/MSBI · SQL Server · Dynamics 365 · Oracle/Unifier · Python/PySpark · Power Automate · IIS Embedding · REST APIs · SSAS/AAS · Data Activator · Informatica ICS · Postman · PowerShell · Azure SQL DB · Salesforce CRM'
+      answer: '__TECH__⚙️ Core Technology Stack\n\n📦 Data Platforms & Warehousing\nMicrosoft Fabric · Azure Synapse Analytics · Snowflake · SQL Server · Azure SQL Database · Oracle Unifier\n\n📊 BI & Analytics\nPower BI · SSAS/AAS · Data Activator · Executive KPI Dashboards · Semantic Models\n\n🔄 Data Engineering & ETL\nAzure Data Factory · SSIS · Informatica Intelligent Cloud Services (IICS) · PySpark · Python · REST API Integrations\n\n🏢 Enterprise Applications\nDynamics 365 · Salesforce CRM · Oracle Unifier\n\n⚡ Automation & DevOps\nPower Automate · PowerShell · IIS Deployment & Embedding · Postman\n\n🎯 Specializations\nETL Pipelines · Data Warehousing · Cloud Migration · Real-Time Reporting · Enterprise Analytics · API Integration'
     },
     /* ── experience ── */
     {
       keywords: ['experience','project','projects','client','clients','company','companies','wusoom','damac','mubadala','hastings','kiwla','aahari','human resource authority'],
-      answer: '💼 Project experience spans 6 enterprises:\n\n• Wusoom Holding (Jan 2025–Present) — Fabric, D365, IIS, Oracle Unifier\n• Damac Properties (Apr–Dec 2024) — Salesforce, Genesys, KPI Dashboards\n• Mubadala Investment (Aug 2022–Mar 2024) — Cloud Migration, Internal Audit BI\n• Human Resource Authority (2023) — API Extraction, Web Scraping\n• Hastings Insurance (2021) — Snowflake DW, Power BI\n• Kiwla/Aahari Corp (2018–2021) — SSAS Cubes, SSIS'
+      get answer() {
+        const { years, months } = calcExperience();
+        const monthNote = months > 0 ? ` and ${months} month${months > 1 ? 's' : ''}` : '';
+        return '__EXPERIENCE__' + `💡 With ${years} years${monthNote} of experience (since August 2018), I've worked on BI and Data Engineering projects for enterprises across real estate, finance, insurance, government, and retail industries.\n\nSome highlights include:\n• Building Microsoft Fabric and Power BI solutions for Wusoom Holding\n• Developing KPI and operational dashboards for Damac Properties\n• Supporting cloud migration and audit analytics for Mubadala Investment\n• Creating API and automation solutions for government entities\n• Designing Snowflake-based reporting systems for insurance analytics\n• Developing SSIS ETL pipelines and SSAS cubes for enterprise reporting\n\nMy expertise covers Power BI, Fabric, SQL, Azure, ETL pipelines, D365 integrations, Snowflake, and enterprise analytics.`;
+      }
     },
     /* ── certifications ── */
     {
       keywords: ['certification','certified','certificate','credentials','pl-300','dp-600','pl300','dp600','microsoft certified'],
-      answer: '🏅 Two active Microsoft Certifications:\n\n• PL-300 — Power BI Data Analyst\n• DP-600 — Fabric Analytics Engineer\n\nCovering the full modern analytics and data engineering stack.'
+      answer: '__CERTS__🏅 Two active Microsoft Certifications:\n\n• PL-300 — Power BI Data Analyst\n• DP-600 — Fabric Analytics Engineer\n\nCovering the full modern analytics and data engineering stack.'
     },
     /* ── contact ── */
     {
@@ -890,15 +1206,13 @@
       keywords: ['iis','web embedding','web portal','portal embedding','iis config','power bi embed'],
       answer: '🌐 IIS Web Embedding:\n\nConfigure and maintain IIS to embed Power BI dashboards into enterprise web portals with secure access, seamless report integration, and enhanced user interactivity.'
     },
-    /* ── years / experience level ── */
-    {
-      keywords: ['how many years','years of experience','experience level','senior level','background'],
-      answer: '📅 Pratap has 7+ years of enterprise BI and data engineering experience, with 7+ major clients served across Abu Dhabi, Dubai, and Hyderabad.'
-    },
     /* ── greetings ── */
     {
       keywords: ['hello','hi','hey','good morning','good afternoon','good evening','howdy','greetings'],
-      answer: '👋 Hello! Great to hear from you. I can answer questions about services, tech stack, project experience, certifications, timelines, pricing, and contact details. What would you like to know?'
+      get answer() {
+        const { emoji, label } = getTimeGreeting();
+        return `${emoji} ${label}! Great to hear from you.\n\nI can answer questions about Pratap's services, tech stack, experience, certifications, and contact details.\n\nWhat would you like to know?`;
+      }
     },
     /* ── thanks ── */
     {
@@ -935,7 +1249,7 @@
     const bubble = document.createElement('div');
     bubble.className = 'chat-bubble';
     if (isHTML) bubble.innerHTML = content;
-    else        bubble.textContent = content;
+    else        bubble.textContent = content; /* textContent + pre-wrap = correct \n rendering */
     wrap.appendChild(bubble);
     const hints = hintsEl();
     hints ? chatBody.insertBefore(wrap, hints) : chatBody.appendChild(wrap);
@@ -963,7 +1277,6 @@
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
   }
 
-  /* ── send logic ── */
   function send() {
     const text = chatInput.value.trim();
     if (!text) return;
@@ -975,30 +1288,59 @@
     addTyping();
 
     if (answer === FALLBACK) {
-      /* First bot message — "I don't have that" */
       setTimeout(() => {
         removeTyping();
         addMsg("I don't have a specific answer for that just yet! For anything detailed, Pratap is just a message away.", 'bot');
       }, 500);
-
-      /* Second bot message — WhatsApp CTA button */
       setTimeout(() => {
         const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello Pratap, I have a question: ' + text)}`;
         addMsg(
           `<a href="${waUrl}" target="_blank" rel="noopener"
-              style="display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;
-                     padding:10px 18px;border-radius:999px;text-decoration:none;font-size:.8rem;
-                     font-weight:500;font-family:'DM Mono',monospace;">
-            💬 Ask Pratap on WhatsApp
+              style="display:inline-flex;align-items:center;gap:5px;
+                     color:#25d366;font-size:.75rem;font-family:'DM Mono',monospace;
+                     text-decoration:none;transition:color .4s;">
+💬 Ask Pratap on WhatsApp →
           </a>`,
           'bot',
           true
         );
       }, 1000);
     } else {
+      const prefixMap = {
+        '__EXPERIENCE__': { flag: 'isExperience', label: 'View detailed project experience →', url: '#experience',    modal: 'showExperienceModal' },
+        '__SERVICES__':   { flag: 'isServices',   label: 'View detailed services →',           url: '#services',      modal: 'showServicesModal'   },
+        '__TECH__':       { flag: 'isTech',        label: 'View detailed Technology stack →',   url: '#tech',          modal: 'showTechModal'        },
+        '__CERTS__':      { flag: 'isCerts',       label: 'View detailed certifications →',     url: '#certifications',modal: 'showCertsModal'       },
+      };
+
+      let sectionKey = null;
+      let cleanAnswer = answer;
+      for (const prefix of Object.keys(prefixMap)) {
+        if (answer.startsWith(prefix)) { sectionKey = prefix; cleanAnswer = answer.slice(prefix.length); break; }
+      }
+
       setTimeout(() => {
         removeTyping();
-        addMsg(answer, 'bot');
+        addMsg(cleanAnswer, 'bot');
+
+        if (sectionKey) {
+          const { label, url, modal } = prefixMap[sectionKey];
+          setTimeout(() => {
+            const clickHandler = modal
+              ? `onclick="${modal}();return false;"`
+              : `target="_blank" rel="noopener"`;
+            addMsg(
+              `<a href="${url}" ${clickHandler}
+                  style="display:inline-flex;align-items:center;gap:6px;
+                         color:#2563eb;font-size:.75rem;font-family:'DM Mono',monospace;
+                         text-decoration:none;border-bottom:1px solid rgba(37,99,235,.3);
+                         padding-bottom:1px;transition:color .2s;">
+${label}
+              </a>`,
+              'bot', true
+            );
+          }, 300);
+        }
       }, 600);
     }
   }
@@ -1016,8 +1358,84 @@
     }
   });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') chatPanel.classList.remove('open');
+    if (e.key === 'Escape') {
+      chatPanel.classList.remove('open');
+      closeExperienceModal();
+      closeServicesModal();
+      closeTechModal();
+      closeCertsModal();
+    }
   });
+
+  /* ── EXPERIENCE MODAL ── */
+  function showExperienceModal() {
+    const { years, months } = calcExperience();
+    const monthNote = months > 0 ? ` & ${months} Month${months > 1 ? 's' : ''}` : '';
+    document.getElementById('expModalYears').textContent =
+      `${years} Years${monthNote} of Experience`;
+    const modal = document.getElementById('expModal');
+    modal.style.display = 'flex';
+    // slight delay so display:flex is applied before transition
+    requestAnimationFrame(() => {
+      modal.style.opacity = '0';
+      modal.style.transition = 'opacity .25s ease';
+      requestAnimationFrame(() => { modal.style.opacity = '1'; });
+    });
+  }
+
+  function closeExperienceModal() {
+    const modal = document.getElementById('expModal');
+    modal.style.opacity = '0';
+    setTimeout(() => { modal.style.display = 'none'; }, 250);
+  }
+
+  /* ── SERVICES MODAL ── */
+  function showServicesModal() {
+    const modal = document.getElementById('servicesModal');
+    modal.style.display = 'flex';
+    requestAnimationFrame(() => {
+      modal.style.opacity = '0';
+      modal.style.transition = 'opacity .25s ease';
+      requestAnimationFrame(() => { modal.style.opacity = '1'; });
+    });
+  }
+  function closeServicesModal() {
+    const modal = document.getElementById('servicesModal');
+    modal.style.opacity = '0';
+    setTimeout(() => { modal.style.display = 'none'; }, 250);
+  }
+
+  /* ── TECH MODAL ── */
+  function showTechModal() {
+    const modal = document.getElementById('techModal');
+    modal.style.display = 'flex';
+    requestAnimationFrame(() => {
+      modal.style.opacity = '0';
+      modal.style.transition = 'opacity .25s ease';
+      requestAnimationFrame(() => { modal.style.opacity = '1'; });
+    });
+  }
+  function closeTechModal() {
+    const modal = document.getElementById('techModal');
+    modal.style.opacity = '0';
+    setTimeout(() => { modal.style.display = 'none'; }, 250);
+  }
+
+  /* ── CERTIFICATIONS MODAL ── */
+  function showCertsModal() {
+    const modal = document.getElementById('certsModal');
+    modal.style.display = 'flex';
+    requestAnimationFrame(() => {
+      modal.style.opacity = '0';
+      modal.style.transition = 'opacity .25s ease';
+      requestAnimationFrame(() => { modal.style.opacity = '1'; });
+    });
+  }
+  function closeCertsModal() {
+    const modal = document.getElementById('certsModal');
+    modal.style.opacity = '0';
+    setTimeout(() => { modal.style.display = 'none'; }, 250);
+  }
 </script>
 </body>
 </html>
